@@ -8,20 +8,23 @@
 // In this way our search is very rapidly narrowed until we find out whether the value we are searching for is in the array or not.
 
 arr1 = [2,4,8,10,15,16,20,22,24,30,67,99,122,146]
-
+iterations = 0;
 
 function findNumber(arr, num){
     var mid = Math.floor(arr.length / 2);
     console.log(arr[mid], num);
 
     if (arr[mid] === num) {
-        console.log('Number matched', arr[mid], num);
+        iterations += 1;
+        console.log('Number matched', arr[mid], num,);
         return arr[mid];
     } else if (arr[mid] < num && arr.length > 1) {
-        console.log('middle value is lower', arr[mid], num);
+        iterations += 1;
+        console.log('middle value is lower', arr[mid], num,);
         return findNumber(arr.splice(mid, Number.MAX_VALUE), num);
     } else if (arr[mid] > num && arr.length > 1) {
-        console.log('middle value is higher', arr[mid], num);
+        iterations += 1;
+        console.log('middle value is higher', arr[mid], num,);
         return findNumber(arr.splice(0, mid), num);
     } else {
         console.log('value not in range', num);
@@ -32,6 +35,7 @@ function findNumber(arr, num){
 var result = findNumber(arr1, 20);
 
 console.log(result);
+console.log(iterations);
 
 
 // console.log(findNumber(arr1, 20))
