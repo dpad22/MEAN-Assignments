@@ -11,7 +11,7 @@
     // - showStats() : Shows stats
     // - drinkSake() : Should add +10 hp to the ninja
 
-function ninja(name, health,){
+function Ninja(name, health,){
         var self = this;
         this.name = name;
         this.health = 100;
@@ -28,14 +28,35 @@ function ninja(name, health,){
         };
         this.drinkSake = function(){
             this.health += 10;
-            console.log("Current Health: " +this.health)
+            console.log("Current Health: "+ this.name + " = " +this.health)
+        }
+        this.punch = function(target){
+            if ((target instanceof Ninja)){
+                target.health -= 5;
+                console.log(this.name + " blasts "+ target.name + " with a huge punch. "+ target.name + " loses 5 hp! "+ target.name + " now has "+ target.health + "hp!")
+        }
+    }
+        this.kick = function(target){
+            if ((target instanceof Ninja)){
+                var damage = 15 * strength;
+                target.health -= damage;
+                console.log(target.name + " was kicked in the face by "+ this.name + " and lost "+ damage + " hp!"+ target.name + " now has "+ target.health + "hp!" )
+            }
         }
 
     }
 
 
-var david = new ninja('David')
+var david = new Ninja('David')
+var subZero = new Ninja ('subZero')
+var scorpion = new Ninja ('scorpion')
 console.log(david)
+subZero.sayname()
 david.sayname()
 david.showStats()
 david.drinkSake()
+david.punch(subZero)
+subZero.punch(david)
+david.kick(subZero)
+david.punch(subZero)
+subZero.drinkSake()
