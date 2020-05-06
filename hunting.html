@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+        
+
+        $.get("https://api.github.com/users/dpad22", displayName)
+    // Notice that displayName is a function that takes in 1 parameter (this is the data that comes back from the API)
+    function displayName(data) {
+        username = data.login;
+        id = data.id;
+    console.log(data);
+    console.log("my username",username);
+    }
+    $( ".button").click(function (data){
+        alert("Data has been requested");
+        $("h3").html(username);
+        $("h5").html(id);
+
+    });
+    });
+    </script>
+
+
+    
+    <title>Document</title>
+</head>
+<body>
+    <input class="button" type="button" value="Get Data">
+    <h3>Here is a placeholder for Username</h3>
+    <h5>Placeholder for User ID</h5>
+</body>
+</html>
