@@ -5,7 +5,7 @@ class Card{
         this.num = num
     }
         showCard(){
-            console.log(`Card displayed is a ${this.suit} of ${this.value}`)
+            console.log("Card displayed is a " + this.value + " of " + this.suit)
         }
 }
 
@@ -23,14 +23,16 @@ class Deck extends Card {
         // arrays for deck creation
     const suits = ['Hearts','Diamonds', 'Spades', 'Clubs'];
     const values = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
+    const nums = ["A",2,3,4,5,6,7,8,9,10,"J","Q","K"];
 // for loop to create 52 card deck
     for(let suit in suits){
-        for(let value in values){
-            this.deck.push(new Card(`${values[value]} of ${suits[suit]}`));
+        for(let i=0; i < nums.length;i++){
+            this.deck.push(new Card(suits[suit], values[i],nums[i]));
             }
         }
-        console.log(`${this.deck}`)
+        return this.deck
     }
+
     // Shuffle
     shuffle(){
         const { deck } = this;
@@ -63,18 +65,19 @@ class Player extends Deck{
         }
         flipCard(){
             var temp = this.hand[0];
-            console.log(temp)
-            this.showCard(temp);
+            temp.showCard()
+            return temp
         }
 
         draw(){
-            this.hand.push(`${this.deal()}`)
-            console.log(`${this.name} is dealt a card`)
+            var dealt = this.hand.push(this.deal())
+            console.log(this.name+ " is dealt a card")
+
             return this.hand
         }
         discardHand(){
             this.hand = []
-            console.log(`${this.name} has discarded their hand. There are ${this.hand.length} cards in their hand.`)
+            console.log(this.name + " has discarded their hand. There are " + this.hand.length + " cards in their hand. ")
         }
         discard(){
             // pick random card to discard
@@ -86,7 +89,7 @@ class Player extends Deck{
             
             this.hand.pop();
 
-            console.log(`${this.name} discards ${temp}, ${this.hand}`)
+            console.log(this.name + " discards "+ this.hand)
             return this.hand
         }
 }
@@ -94,19 +97,14 @@ class Player extends Deck{
 
 const firstDeck = new Deck();
 const david = new Player('David');
-// firstDeck.reset()
+const card = new Card('Spades', 'Ace', 'a')
+
+card.showCard()
+
+firstDeck.reset()
 david.showPlayer()
 david.draw()
 david.draw()
 david.draw()
-david.draw()
 david.flipCard()
-console.log(david.hand.length)
-david.discard()
-// david.showCard()
-// david.discardHand()
-// console.log(david.hand.length)
-
-
-
-
+david.showPlayer()
